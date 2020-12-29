@@ -9,7 +9,9 @@ from .forms import NewAuctionListing
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/index.html",{
+        "listings": AuctionListing.objects.all(),
+    })
 
 
 def login_view(request):
@@ -69,3 +71,19 @@ def new_listing(request):
         return render(request, "auctions/new_listing.html", {
             "form": NewAuctionListing()
         })
+    if request.method == "POST":
+        # take in user data and save to form
+        form = NewAuctionListing(request.POST);
+        # validation
+        if form.is_valid():
+            # Extracting data
+
+            seller = form.cleaned_data["seller"]
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data["description"]
+            category = form.cleaned_data["category"]
+            image_url = form.cleaned_data["image_url"]
+
+            new_auction_listing = AuctionListing( seller = seller, title = title, description=description, category = category, image_url=image_url)
+            new_auction_listing.save()
+            return HttpResponseRedirect(reverse("index"))

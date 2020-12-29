@@ -13,3 +13,11 @@ class AuctionListing(models.Model):
     description = models.TextField(max_length=2056)
     category = models.CharField(max_length=20, blank=True)
     image_url = models.URLField()
+
+    def __str__(self):
+        return f"""id=:{self.id}
+        seller:{self.seller}
+        title:{self.title}
+        category:{self.category}
+        image_url:{self.image_url}
+        """
