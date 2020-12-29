@@ -4,7 +4,15 @@
     <h2>Active Listings</h2>
 
     {% for listing in listings%}
-        <li>{{ listing.title }}</li>
+        <div class = "flex-container">
+            <div>
+                {{ listing.title }}
+            </div>
+            <div>
+                <img src = "{{ listing.image_url }}" >
+            </div>
+        </div>
+
     {% endfor %}
 
 {% endblock %}
