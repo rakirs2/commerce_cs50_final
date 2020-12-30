@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Product Page</h2>
+    <div class = "container">
+        <div class = "row">
+            Div class
+        </div>
+
+    </div>
+    {{product.title }}
+    <br>
+    {{ product.description}}
+    <br>
+    {{ product.initial_bid }}
+    <br>
+    {{ product.category }}
+    <br>
+    <img src="{{ product.image_url }}" alt = "{{ product.title}}">
+
+    <form action = "#">
+        <button>Bid</button>
+    </form>
+
+    <form action = "{%  url 'add_to_watchlist' id %}" method = "post">
+        {% csrf_token %}
+        <input type = "submit" value = "Add to watchlist">
+    </form>
+{% endblock %}

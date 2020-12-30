@@ -1,0 +1,23 @@
+$color: blue;
+$bordercolor: black;
+ul {
+    font-size: 14px;
+    color: $color;
+}
+
+ol {
+    font-size: 18px;
+    color: $color;
+}
+p {
+    color: $color;
+}
+h2{
+    color: $color;
+}
+img{
+    width: 200px;
+}
+body{
+    padding: 0px 100px 0px 100px;
+}

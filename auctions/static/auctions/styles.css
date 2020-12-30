@@ -1,3 +1,27 @@
-body {
-    padding: 10px;
+ul {
+  font-size: 14px;
+  color: blue;
 }
+
+ol {
+  font-size: 18px;
+  color: blue;
+}
+
+p {
+  color: blue;
+}
+
+h2 {
+  color: blue;
+}
+
+img {
+  width: 200px;
+}
+
+body {
+  padding: 0px 100px 0px 100px;
+}
+
+/*# sourceMappingURL=styles.css.map */

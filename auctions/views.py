@@ -1,15 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, AuctionListing
+from .models import User, AuctionListing, Watchlist
 from .forms import NewAuctionListing
 
 
 def index(request):
-    return render(request, "auctions/index.html",{
+    return render(request, "auctions/index.html", {
         "listings": AuctionListing.objects.all(),
     })
 
@@ -83,7 +84,34 @@ def new_listing(request):
             description = form.cleaned_data["description"]
             category = form.cleaned_data["category"]
             image_url = form.cleaned_data["image_url"]
+            initial_bid = form.cleaned_data["initial_bid"]
 
-            new_auction_listing = AuctionListing( seller = seller, title = title, description=description, category = category, image_url=image_url)
+            new_auction_listing = AuctionListing(seller=seller,
+                                                 title=title,
+                                                 description=description,
+                                                 category=category,
+                                                 image_url=image_url,
+                                                 initial_bid=initial_bid)
             new_auction_listing.save()
             return HttpResponseRedirect(reverse("index"))
+
+
+def product_page(request, product_id):
+    if request.method == "GET":
+        product = AuctionListing.objects.get(id=product_id)
+        return render(request, "auctions/product.html", {
+            "product": product,
+        })
+
+
+@login_required
+def add_to_watchlist(request):
+    """
+    Method to add items to the watchlist. Takes in product id in the url and gets username from
+    """
+    if request.method == "POST":
+        temp_user = User.objects.get(username=request.user.username)
+        temp_listing = AuctionListing.objects.get(id=product_id)
+        temp = Watchlist(buyer=temp_user, auction_listing=temp_listing)
+        temp.save()
+        return render(request, index)

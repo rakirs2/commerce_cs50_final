@@ -4,13 +4,25 @@
     <h2>Active Listings</h2>
 
     {% for listing in listings%}
-        <div class = "flex-container">
-            <div>
-                {{ listing.title }}
-            </div>
-            <div>
-                <img src = "{{ listing.image_url }}" >
-            </div>
+        <div class = "container">
+            <div class = "row active-listing">
+                <div class = "col-sm listing-img">
+                    <img src = "{{ listing.image_url }}" >
+                </div>
+                <div class = "col-sm">
+                    <h3>{{ listing.title }}</h3>
+                    <br>
+                    Initial bid: {{ listing.initial_bid}}
+                    <br>
+                    Current bid: xxxxx
+                </div>
+                <div class = "col-lg">
+                    {{ listing.description }}
+                </div>
+                <div class = "col-lg">
+
+                </div>
+            </div >
         </div>
 
     {% endfor %}
