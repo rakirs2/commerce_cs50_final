@@ -5,8 +5,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, AuctionListing, Watchlist
-from .forms import NewAuctionListing
+from .models import *
+from .forms import *
 
 
 def index(request):
@@ -103,15 +103,3 @@ def product_page(request, product_id):
             "product": product,
         })
 
-
-@login_required
-def add_to_watchlist(request):
-    """
-    Method to add items to the watchlist. Takes in product id in the url and gets username from
-    """
-    if request.method == "POST":
-        temp_user = User.objects.get(username=request.user.username)
-        temp_listing = AuctionListing.objects.get(id=product_id)
-        temp = Watchlist(buyer=temp_user, auction_listing=temp_listing)
-        temp.save()
-        return render(request, index)

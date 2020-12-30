@@ -1,4 +1,5 @@
-$color: blue;
+$color: red;
+$color2: black;
 $bordercolor: black;
 ul {
     font-size: 14px;
@@ -10,7 +11,7 @@ ol {
     color: $color;
 }
 p {
-    color: $color;
+    color: $color2;
 }
 h2{
     color: $color;

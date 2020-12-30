@@ -2,12 +2,13 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-
     {% for listing in listings%}
         <div class = "container">
             <div class = "row active-listing">
                 <div class = "col-sm listing-img">
-                    <img src = "{{ listing.image_url }}" >
+                    <a href = "#" method = 'get' alt = "product_page">
+                        <img src = "{{ listing.image_url }}" >
+                    </a>
                 </div>
                 <div class = "col-sm">
                     <h3>{{ listing.title }}</h3>
