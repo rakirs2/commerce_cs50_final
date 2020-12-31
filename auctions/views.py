@@ -103,3 +103,26 @@ def product_page(request, product_id):
             "product": product,
         })
 
+
+def add_to_watchlist(request, product_id):
+    """
+    Adds item to specific user's watchlist
+
+    :param request: general request
+    :param product_id: id of item/listing
+    :return: back to main page
+    """
+    if request.user.username:
+        temp = Watchlist(user=request.user.username, temp=product_id)
+        temp.save()
+        return HttpResponseRedirect(product_page(request, product_id))
+
+
+def view_user_home(request):
+    user_temp = User.objects.get(username=request.user.username)
+    try:
+        user_watchlist = Watchlist.objects.filter(user_temp)
+    except:
+        print('most likely no objects')
+    finally:
+        return render(request, 'auctions/user_page.html')

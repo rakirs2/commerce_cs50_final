@@ -34,3 +34,8 @@ class Bid(models.Model):
 class Watchlist(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="customer")
     auction_listing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE, related_name="item")
+
+    def __str__(self):
+        return f"""buyer: {self.buyer}
+        auction_listing: {self.auction_listing}
+        """
